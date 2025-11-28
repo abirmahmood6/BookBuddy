@@ -7,6 +7,9 @@ import DeleteBook from "./pages/DeleteBook"
 // { } = specific things you pick from a library
 // No braces { } = one main thing 
 
+// To-do:
+// Watch "show bookslist in react" and UNDERSTAND then do it yourself
+
 const App = () => {
   return (
     <div> {/* Add the DaisyUI theme here */}
