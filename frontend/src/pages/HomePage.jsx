@@ -58,9 +58,9 @@ const HomePage = () => {
             <td className='text-center border border-slate-700'> Description here </td>
             <div className='flex justify-center'> 
               <Link to =""> <Brain/></Link> 
-              <Link to ="/books/details/:id"> <Info/> </Link>
-              <Link to ="/books/edit/:id"> <SquarePen/></Link> 
-              <Link to ="/books/delete/:id"> <Trash2/></Link>
+              <Link to ={`/books/details/${book._id}`}> <Info/> </Link>
+              <Link to ={`/books/edit/${book._id}`}> <SquarePen/></Link> 
+              <Link to ={`/books/delete/${book._id}`}> <Trash2/></Link>
             </div>
           </tr>
           ))}
