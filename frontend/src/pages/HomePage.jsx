@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react'
 import axios from "axios"
 import { Brain, Info, SquarePen, Trash2 } from "lucide-react"
 import LoadingUI from "../components/LoadingUI"
-
+import create from '../components/BackButton'
+import Navbar from "../components/Navbar"
 /*
   * align the row to data
   * setup the 3 operations icon
@@ -29,12 +30,9 @@ const HomePage = () => {
   },[])
   
   return (
-    <div className='min-h-screen border p-4 border-red-600'>
-      <div className='flex justify-between items-center border border-red-600'>
-        <h1 className='text-2xl p-4'>
-          Book Titles
-        </h1>
-      </div>
+    <div className='min-h-screen border border-red-600'>
+        <Navbar/>
+      {/* + New Book btn here */}
         {loading ? (<LoadingUI/>) : (
         <table className='w-full border-separate border-spacing-2 border border-blue-500'>
         <thead>
@@ -56,7 +54,7 @@ const HomePage = () => {
             <td className='text-center border border-slate-700'> {book.author}</td>
             <td className='text-center border border-slate-700'> {book.publishYear}</td>
             <td className='text-center border border-slate-700'> Description here </td>
-            <div className='flex justify-center'> 
+            <div className='flex justify-center gap-1'> 
               <Link to =""> <Brain/></Link> 
               <Link to ={`/books/details/${book._id}`}> <Info/> </Link>
               <Link to ={`/books/edit/${book._id}`}> <SquarePen/></Link> 
@@ -67,12 +65,6 @@ const HomePage = () => {
         </tbody>
         </table>
         )}
-
-
-        
-
-    
-      
     </div>
   )
 }
