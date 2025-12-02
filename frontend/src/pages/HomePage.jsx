@@ -16,55 +16,57 @@ import Navbar from "../components/Navbar"
 const HomePage = () => {
   const [books, setBooks] = useState([])
   const [loading, setLoading] = useState(false) // set spinner when loading,
-  useEffect(()=>{
+  useEffect(() => {
     setLoading(true)
-      axios.get("http://localhost:5002/").then((response) => {
-        setBooks(response.data)
-        setLoading(false)
-      })
-      .catch ((error) => {
-      console.log("Error getting all books: ", error)
+    axios.get("http://localhost:5002/books").then((response) => {
+      setBooks(response.data)
       setLoading(false)
     })
+      .catch((error) => {
+        console.log("Error getting all books: ", error)
+        setLoading(false)
+      })
 
-  },[])
-  
+  }, [])
+
   return (
     <div className='min-h-screen border border-red-600'>
-        <Navbar/>
+      <Navbar />
       {/* + New Book btn here */}
-        {loading ? (<LoadingUI/>) : (
+      {loading ? (<LoadingUI />) : (
         <table className='w-full border-separate border-spacing-2 border border-blue-500'>
-        <thead>
-          <tr>
-          <th className='border border-slate-700'> No </th>
-          <th className='border border-slate-700'> Book </th>
-          <th className='border border-slate-700'> Author </th>
-          <th className='border border-slate-700'> Publish Year </th>
-          <th className='border border-slate-700'> Description </th>
-          <th className='border border-slate-700'> Operation </th>
-          </tr>
-        </thead>
+          <thead>
+            <tr>
+              <th className='border border-slate-700'> No </th>
+              <th className='border border-slate-700'> Book </th>
+              <th className='border border-slate-700'> Author </th>
+              <th className='border border-slate-700'> Publish Year </th>
+              <th className='border border-slate-700'> Description </th>
+              <th className='border border-slate-700'> Operation </th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {books.map((book,index) =>(
-          <tr key={book._id}>
-            <td className='text-center border border-slate-700'> {index = index + 1} </td>
-            <td className='text-center border border-slate-700'> {book.title}</td>
-            <td className='text-center border border-slate-700'> {book.author}</td>
-            <td className='text-center border border-slate-700'> {book.publishYear}</td>
-            <td className='text-center border border-slate-700'> Description here </td>
-            <div className='flex justify-center gap-1'> 
-              <Link to =""> <Brain/></Link> 
-              <Link to ={`/books/details/${book._id}`}> <Info/> </Link>
-              <Link to ={`/books/edit/${book._id}`}> <SquarePen/></Link> 
-              <Link to ={`/books/delete/${book._id}`}> <Trash2/></Link>
-            </div>
-          </tr>
-          ))}
-        </tbody>
+          <tbody>
+            {books.map((book, index) => (
+              <tr key={book._id}>
+                <td className='text-center border border-slate-700'> {index = index + 1} </td>
+                <td className='text-center border border-slate-700'> {book.title}</td>
+                <td className='text-center border border-slate-700'> {book.author}</td>
+                <td className='text-center border border-slate-700'> {book.publishYear}</td>
+                <td className='text-center border border-slate-700'> Description here </td>
+                <td>
+                  <div className='flex justify-center gap-1'>
+                    <Link to=""> <Brain /></Link>
+                    <Link to={`/books/details/${book._id}`}> <Info /> </Link>
+                    <Link to={`/books/edit/${book._id}`}> <SquarePen /></Link>
+                    <Link to={`/books/delete/${book._id}`}> <Trash2 /></Link>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
-        )}
+      )}
     </div>
   )
 }
