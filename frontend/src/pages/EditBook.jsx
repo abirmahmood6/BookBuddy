@@ -5,6 +5,7 @@ import LoadingUI from "../components/LoadingUI"
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Trash2Icon } from 'lucide-react'
 
 const EditBook = () => {
   const [loading, setLoading] = useState(false)
@@ -52,6 +53,21 @@ const EditBook = () => {
       })
   }
 
+  const handleDelete = (() => {
+    if (!window.confirm("Do you want to delete the book?")){
+      return;
+    }
+    axios.delete(`http://localhost:5002/books/${id}`)
+    .then(() => {
+      toast.success("Book deleted successfully")
+      navigate("/")
+    })
+    .catch((error) => {
+      console.log("Error in deleting the book: ", error)
+      toast.error("Error deleting book")
+    })
+  })
+
   return (
     <div className='min-h-screen p-4'>
       <BackButton />
@@ -60,6 +76,7 @@ const EditBook = () => {
           <h1 className='my-4 font-mono'> Edit Book </h1>
           <div className='flex flex-col border-2 border-sky-300 rounded-xl w-fit p-4'>
             {/* structure and repeat*/}
+            <Trash2Icon size={35} onClick={handleDelete} className='p-1 flex self-end text-red-500 hover:bg-slate-300 transition duration-200 rounded-xl cursor-pointer'/>
             <div className='my-4 flex justify-between'>
               <label className='mr-2 text-xl text-gray-500'> Title: </label>
               <input

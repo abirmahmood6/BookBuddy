@@ -59,7 +59,6 @@ const HomePage = () => {
                     <Link to=""> <Brain /></Link>
                     <Link to={`/books/details/${book._id}`}> <Info /> </Link>
                     <Link to={`/books/edit/${book._id}`}> <SquarePen /></Link>
-                    <Link to={`/books/delete/${book._id}`}> <Trash2 /></Link>
                   </div>
                 </td>
               </tr>
